@@ -1,6 +1,5 @@
 #canvas {
-    background: url("http://www.rollingstone.fr/RS-WP-magazine/wp-content/uploads/2014/08/space-1.jpg") no-repeat center;
-    background-size: cover;
+    background-color: black;
     border: 1px solid gray;
     max-width: 1520px;
     max-height: 700px;

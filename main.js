@@ -74,6 +74,8 @@ function FrameWork(){
         setInterval(colorBrakeSoucoupe, 3);     //chnagem la couleur de la cabine de la soucoupe quand on clique dessus
         requestAnimationFrame(animeCanvas);
 
+        createSoucoupe(10);
+
     }
 
     //renvoie la valeur de la vitesse des soucoupe précédente
