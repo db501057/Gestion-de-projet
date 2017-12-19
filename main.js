@@ -5,8 +5,8 @@ var fw;
 var checkNuage;
 
 window.addEventListener('keydown', function (event) {
-    if(event.keyCode === 37){
-        fw.rotateVaisseau();
+    if(event.keyCode === 37 || event.keyCode === 39 || event.keyCode === 38 || event.keyCode === 40){
+        fw.rotateVaisseau(event.keyCode);
     }
 });
 
@@ -64,17 +64,17 @@ function FrameWork(){
     let canvas, ctx;          //Les varaible du canvas
     var h, w;     //les dimension du canvas
     let tabObjectExtraterrestre = [];     //tableau avec tous les objets du canvas
-    let tabObjectCloud = [];
+   let tabObjectCloud = [];
     let tabObjectSoucoupe = [];
     let tabObjectEtoile = [];
-    let couleur = Math.random() * 100 + 155;        //couleur des nuages au départ
-    var colorCloud =  "rgb("+couleur+","+couleur+","+couleur+")";       //stockage de la couleur
+    //let couleur = Math.random() * 100 + 155;        //couleur des nuages au départ
+    //var colorCloud =  "rgb("+couleur+","+couleur+","+couleur+")";       //stockage de la couleur
     var speedSoucoupe = 0;      //vitesse en plus des soucoupe volantes
     let img;
 
 
     function rotateVaisseau(){
-        img.rotate();
+        img.rotateV();
     }
 
 
@@ -85,10 +85,11 @@ function FrameWork(){
         //animation du canvas
         setInterval(changeColorChap, 10);       //changement de la couleur du chapeau de l'extraterrestre
         setInterval(colorBrakeSoucoupe, 3);     //chnagem la couleur de la cabine de la soucoupe quand on clique dessus
-        //setInterval(createEtoile(50), 1);
         requestAnimationFrame(animeCanvas);
 
         createSoucoupe(2);
+        var imgHTML = document.querySelector('#cabineV');
+        img = new CabineVaisseau(imgHTML, w, h);
 
     }
 
@@ -105,7 +106,7 @@ function FrameWork(){
 
     //animation
     function animeCanvas(){
-        createEtoile(5);
+        createEtoile(7);
         getDimCanavs();      //on verifie les dimension du canvas
         ctx.clearRect(0, 0, w, h);
         tabObjectExtraterrestre.forEach(function(r){
@@ -145,8 +146,6 @@ function FrameWork(){
         //regarde les nuage a supprimer qui sont dehor du canvas
         removeCloud(tabObjectCloud);
 
-        var imgHTML = document.querySelector('#cabineV');
-        img = new CabineVaisseau(imgHTML, w, h, 0);
         img.draw(ctx);
 
 
