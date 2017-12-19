@@ -65,8 +65,6 @@ function FrameWork(){
     var colorCloud =  "rgb("+couleur+","+couleur+","+couleur+")";       //stockage de la couleur
     var speedSoucoupe = 0;      //vitesse en plus des soucoupe volantes
 
-    createSoucoupe(10);
-
     function init(){
         canvas = document.querySelector("#canvas");
         ctx = canvas.getContext("2d");
