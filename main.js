@@ -5,8 +5,25 @@ var fw;
 var checkNuage;
 
 window.addEventListener('keydown', function (event) {
+    if(event.keyCode === 37){
+        fw.rotateVaisseau(37);
+    }
+
+    if (event.keyCode === 39){
+        fw.rotateVaisseau(39);
+    } 
+
+    if(event.keyCode === 38){
+        fw.rotateVaisseau(38);
+
+    } if (event.keyCode === 40){
+        fw.rotateVaisseau(40);
+    }
+});
+
+window.addEventListener('keyup', function (event) {
     if(event.keyCode === 37 || event.keyCode === 39 || event.keyCode === 38 || event.keyCode === 40){
-        fw.rotateVaisseau(event.keyCode);
+        fw.rotateVaisseauI();
     }
 });
 
@@ -73,8 +90,12 @@ function FrameWork(){
     let img;
 
 
-    function rotateVaisseau(){
-        img.rotateV();
+    function rotateVaisseau(key){
+        img.rotateV(key);
+    }
+
+    function rotateVaisseauI(){
+        img.retour();
     }
 
 
@@ -427,7 +448,8 @@ function FrameWork(){
         downSoucoupe,
         getPosXScroll,
         getPosYScroll,
-        rotateVaisseau
+        rotateVaisseau,
+        rotateVaisseauI
     }
 
 

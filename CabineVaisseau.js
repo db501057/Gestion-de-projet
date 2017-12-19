@@ -23,21 +23,33 @@ class CabineVaisseau {
 
 
     rotateV(key){
-        switch (key){
-            case 37: {
-                this.rotation = this.rotation - .005;
 
-                if(this.rotation < -.24){
-                    this.rotation = -.24;
-                }
+        if(key === 37){
+            this.rotation -= .005;
+            if(this.rotation < -.24){
+                this.rotation = -.24;
             }
-
-            case 38: {
-
-
-
         }
 
+
+        if (key == 39) {
+            this.rotation += .005;
+
+            if(this.rotation > .24){
+                this.rotation = .24;
+            }
+
+        }
+    }
+
+
+    retour(){
+        for (var i = 0; i < abs(this.rotation / .005); i++){
+            if(this.rotation < 0){
+                this.rotation += .005;
+            } else{
+                this.rotation -= .005;
+            }
         }
     }
 
