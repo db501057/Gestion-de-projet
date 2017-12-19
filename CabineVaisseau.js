@@ -4,7 +4,8 @@ class CabineVaisseau {
         this.image = img;
         this.w = w;
         this.h = h;
-        this.rotation = 0
+        this.rotation = 0;
+        this.translate = 0;
     }
 
     draw(ctx){
@@ -16,7 +17,7 @@ class CabineVaisseau {
         ctx.translate(dw, dh);
         ctx.rotate(this.rotation);
         ctx.scale(1.5, 1.5);
-        ctx.translate(0, 0);
+        ctx.translate(0, this.translate);
         ctx.drawImage(this.image, -dw, -dh, this.w, this.h);
         ctx.restore();
     }
@@ -40,6 +41,22 @@ class CabineVaisseau {
             }
 
         }
+
+
+        if(key == 38){
+            this.translate += 10;
+            if(this.translate > 60){
+                this.translate = 60;
+            }
+        }
+
+
+        if(key == 40){
+            this.translate -= 10;
+            if(this.translate <  -60){
+                this.translate = -60;
+            }
+        }
     }
 
 
@@ -52,5 +69,4 @@ class CabineVaisseau {
             }
         }
     }
-
 }
