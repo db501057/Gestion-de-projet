@@ -34,7 +34,7 @@ class CabineVaisseau {
 
 
         if (key == 39) {
-            this.rotation += .005;
+            this.rotation += .01;
 
             if(this.rotation > .24){
                 this.rotation = .24;
@@ -60,13 +60,13 @@ class CabineVaisseau {
     }
 
 
-    retour(){
-        for (var i = 0; i < abs(this.rotation / .005); i++){
+    /*retour(){
+        for (var i = 0; i < Math.abs(this.rotation / .005); i++){
             if(this.rotation < 0){
                 this.rotation += .005;
             } else{
                 this.rotation -= .005;
             }
         }
-    }
+    }*/
 }

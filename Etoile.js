@@ -4,6 +4,7 @@ class Etoile {
         this.x = x;
         this.y = y;
         this.taille = taille;
+        this.vitesse = 1;
     }
 
 
@@ -21,15 +22,15 @@ class Etoile {
 
     move(w, h){
         if(this.x >= w/2){
-            this.x += 1 * Math.random()
+            this.x += this.vitesse * Math.random()
         } else {
-            this.x -= 1 * Math.random()
+            this.x -= this.vitesse * Math.random()
         }
 
         if(this.y > h/2){
-            this.y += 1 * Math.random()
+            this.y += this.vitesse * Math.random()
         } else {
-            this.y -= 1 * Math.random()
+            this.y -= this.vitesse * Math.random()
         }
     }
 
@@ -39,6 +40,11 @@ class Etoile {
 
     getY(){
         return this.y;
+    }
+
+
+    acceleration(){
+        this.vitesse += 1;
     }
 
 

@@ -4,6 +4,7 @@ window.onload = init;
 var fw;
 var checkNuage;
 
+
 window.addEventListener('keydown', function (event) {
     if(event.keyCode === 37){
         fw.rotateVaisseau(37);
@@ -19,13 +20,17 @@ window.addEventListener('keydown', function (event) {
     } if (event.keyCode === 40){
         fw.rotateVaisseau(40);
     }
+
+    if(event.keyCode === 32){
+        fw.speedV();
+    }
 });
 
-window.addEventListener('keyup', function (event) {
+/*window.addEventListener('keyup', function (event) {
     if(event.keyCode === 37 || event.keyCode === 39 || event.keyCode === 38 || event.keyCode === 40){
         fw.rotateVaisseauI();
     }
-});
+});*/
 
 
 function init(){
@@ -96,6 +101,12 @@ function FrameWork(){
 
     function rotateVaisseauI(){
         img.retour();
+    }
+
+    function speedV() {
+        tabObjectEtoile.forEach(function (e) {
+            e.acceleration();
+        })
     }
 
 
@@ -449,7 +460,8 @@ function FrameWork(){
         getPosXScroll,
         getPosYScroll,
         rotateVaisseau,
-        rotateVaisseauI
+        rotateVaisseauI,
+        speedV,
     }
 
 
