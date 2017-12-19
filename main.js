@@ -1,4 +1,4 @@
-//lorsque que la page est chargÃ©
+//lorsque que la page est chargé
 window.onload = init;
 
 var fw;
@@ -13,26 +13,26 @@ function init(){
 
 /*Variable pour HTML et input*/
 {
-    //crÃ©er le nombre d'extraterrestre selctionnÃ© par le range
+    //créer le nombre d'extraterrestre selctionné par le range
     function createNExtraterreste(nb) {
         fw.clearTabE();
         fw.createExtraterreste(nb);
         document.querySelector("#extra").innerHTML = nb;
     }
 
-//recupere la couleur selectionnÃ©e pour les nuages
+//recupere la couleur selectionnée pour les nuages
     function changeColorCloud(color) {
         fw.changeColor(color);
     }
 
-//crÃ©er le nombre de soucoupe selectionnÃ© au range
+//créer le nombre de soucoupe selectionné au range
     function createNSoucoupe(n) {
         fw.clearTabS();
         fw.createSoucoupe(n);
         document.querySelector("#nbSoucoupe").innerHTML = n;
     }
 
-//recupere l'Ã©tat de la radio box nuage
+//recupere l'état de la radio box nuage
     function gereCloud(check) {
         checkNuage = check;
         fw.nuages();
@@ -46,7 +46,7 @@ function init(){
         document.querySelector("#rVitesseS").innerHTML = speedM;
     }
 
-//recupÃ¨re la position su clique de la souris
+//recupère la position su clique de la souris
     function getMouse(event) {
         let xMouse = event.clientX - fw.getPosXCanvas() + fw.getPosXScroll();
         let yMouse = event.clientY - fw.getPosYCanvas() + fw.getPosYScroll();
@@ -61,9 +61,10 @@ function FrameWork(){
     let tabObjectExtraterrestre = [];     //tableau avec tous les objets du canvas
     let tabObjectCloud = [];
     let tabObjectSoucoupe = [];
-    let couleur = Math.random() * 100 + 155;        //couleur des nuages au dÃ©part
+    let couleur = Math.random() * 100 + 155;        //couleur des nuages au départ
     var colorCloud =  "rgb("+couleur+","+couleur+","+couleur+")";       //stockage de la couleur
     var speedSoucoupe = 0;      //vitesse en plus des soucoupe volantes
+
 
     function init(){
         canvas = document.querySelector("#canvas");
@@ -73,10 +74,9 @@ function FrameWork(){
         setInterval(changeColorChap, 10);       //changement de la couleur du chapeau de l'extraterrestre
         setInterval(colorBrakeSoucoupe, 3);     //chnagem la couleur de la cabine de la soucoupe quand on clique dessus
         requestAnimationFrame(animeCanvas);
-
     }
 
-    //renvoie la valeur de la vitesse des soucoupe prÃ©cÃ©dente
+    //renvoie la valeur de la vitesse des soucoupe précédente
     function getSpeedSoucoupe(){
         return speedSoucoupe;
     }
@@ -86,6 +86,15 @@ function FrameWork(){
         w = canvas.width;
         h = canvas.height;
     }
+
+
+    function genereVaisseau(){
+        var imgHTML = document.querySelector('#cabineV');
+        let img = new CabineVaisseau(imgHTML, w, h);
+        img.draw(ctx);
+    }
+
+    console.log(tabObjectSoucoupe);
 
     //animation
     function animeCanvas(){
@@ -119,9 +128,13 @@ function FrameWork(){
         //regarde les nuage a supprimer qui sont dehor du canvas
         removeCloud(tabObjectCloud);
 
+        genereVaisseau();
 
         requestAnimationFrame(animeCanvas);
     }
+
+
+
 
     //change la couleur du chapeau
     function changeColorChap() {
@@ -134,7 +147,7 @@ function FrameWork(){
         });
     }
 
-    //color de la soucoupe cassÃ©
+    //color de la soucoupe cassé
     function colorBrakeSoucoupe(){
         tabObjectSoucoupe.forEach(function (s) {
             if (s.touch){
@@ -187,7 +200,7 @@ function FrameWork(){
             }
         }
 
-        //genere un Ã©chelle alÃ©atoire != 0
+        //genere un échelle aléatoire != 0
         function genereScale(){
             let ps = Math.random() * 0.7;
             if (ps == 0){
@@ -199,7 +212,7 @@ function FrameWork(){
 
         //genere les n objets extraterrestres
         for(i = 0; i < n; i++){
-            let scale = genereScale();      //genere un Ã©chelle au hasard
+            let scale = genereScale();      //genere un échelle au hasard
             let posX = Math.floor(genereX(scale));       //position x
             let posY = Math.floor(genereY(scale));       //position y
             let vitX = Math.random() * 2;
@@ -277,7 +290,7 @@ function FrameWork(){
             }
         }
 
-        //genere un Ã©chelle alÃ©atoire != 0
+        //genere un échelle aléatoire != 0
         function genereScale(){
             let ps = Math.random() * 0.7;
             if (ps === 0){
@@ -289,7 +302,7 @@ function FrameWork(){
 
         //genere les n objets soucoupes
         for(i = 0; i < n; i++){
-            let scale = genereScale();      //genere un Ã©chelle au hasard
+            let scale = genereScale();      //genere un échelle au hasard
             let posX = Math.floor(genereX(scale));       //position x
             let posY = Math.floor(genereY(scale));       //position y
             let vitX = Math.floor(Math.random() * 6 - 12);
@@ -343,7 +356,7 @@ function FrameWork(){
         return canvas.offsetTop;
     }
 
-    //renvoye les coordonÃ©e du scroll
+    //renvoye les coordonée du scroll
     function getPosXScroll(){
         return window.scrollX;
     }
@@ -352,7 +365,7 @@ function FrameWork(){
         return window.scrollY;
     }
 
-    //fait tomber la soucoupe si on a cliquÃ© dessus
+    //fait tomber la soucoupe si on a cliqué dessus
     function downSoucoupe(xMouse, yMouse){
         tabObjectSoucoupe.forEach(function(s){
             if(xMouse >= s.x - 50 && xMouse <= s.x + 50 && yMouse >= s.y - 50 && yMouse <= s.y + 50){
@@ -384,4 +397,6 @@ function FrameWork(){
         getPosXScroll,
         getPosYScroll
     }
+
+
 }
