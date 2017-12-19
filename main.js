@@ -1,4 +1,4 @@
-//lorsque que la page est chargé
+//lorsque que la page est chargÃ©
 window.onload = init;
 
 var fw;
@@ -13,26 +13,26 @@ function init(){
 
 /*Variable pour HTML et input*/
 {
-    //créer le nombre d'extraterrestre selctionné par le range
+    //crÃ©er le nombre d'extraterrestre selctionnÃ© par le range
     function createNExtraterreste(nb) {
         fw.clearTabE();
         fw.createExtraterreste(nb);
         document.querySelector("#extra").innerHTML = nb;
     }
 
-//recupere la couleur selectionnée pour les nuages
+//recupere la couleur selectionnÃ©e pour les nuages
     function changeColorCloud(color) {
         fw.changeColor(color);
     }
 
-//créer le nombre de soucoupe selectionné au range
+//crÃ©er le nombre de soucoupe selectionnÃ© au range
     function createNSoucoupe(n) {
         fw.clearTabS();
         fw.createSoucoupe(n);
         document.querySelector("#nbSoucoupe").innerHTML = n;
     }
 
-//recupere l'état de la radio box nuage
+//recupere l'Ã©tat de la radio box nuage
     function gereCloud(check) {
         checkNuage = check;
         fw.nuages();
@@ -46,7 +46,7 @@ function init(){
         document.querySelector("#rVitesseS").innerHTML = speedM;
     }
 
-//recupère la position su clique de la souris
+//recupÃ¨re la position su clique de la souris
     function getMouse(event) {
         let xMouse = event.clientX - fw.getPosXCanvas() + fw.getPosXScroll();
         let yMouse = event.clientY - fw.getPosYCanvas() + fw.getPosYScroll();
@@ -61,9 +61,11 @@ function FrameWork(){
     let tabObjectExtraterrestre = [];     //tableau avec tous les objets du canvas
     let tabObjectCloud = [];
     let tabObjectSoucoupe = [];
-    let couleur = Math.random() * 100 + 155;        //couleur des nuages au départ
+    let couleur = Math.random() * 100 + 155;        //couleur des nuages au dÃ©part
     var colorCloud =  "rgb("+couleur+","+couleur+","+couleur+")";       //stockage de la couleur
     var speedSoucoupe = 0;      //vitesse en plus des soucoupe volantes
+
+    createSoucoupe(10);
 
     function init(){
         canvas = document.querySelector("#canvas");
@@ -74,19 +76,17 @@ function FrameWork(){
         setInterval(colorBrakeSoucoupe, 3);     //chnagem la couleur de la cabine de la soucoupe quand on clique dessus
         requestAnimationFrame(animeCanvas);
 
-        createSoucoupe(10);
-
     }
 
-    //renvoie la valeur de la vitesse des soucoupe précédente
+    //renvoie la valeur de la vitesse des soucoupe prÃ©cÃ©dente
     function getSpeedSoucoupe(){
         return speedSoucoupe;
     }
 
     //recupere les dimension du canvas en cas de redimensionnement de la page web
     function getDimCanavs() {
-       w = canvas.width;
-       h = canvas.height;
+        w = canvas.width;
+        h = canvas.height;
     }
 
     //animation
@@ -136,10 +136,10 @@ function FrameWork(){
         });
     }
 
-    //color de la soucoupe cassé
+    //color de la soucoupe cassÃ©
     function colorBrakeSoucoupe(){
         tabObjectSoucoupe.forEach(function (s) {
-           if (s.touch){
+            if (s.touch){
                 if(s.colorC === 'lightblue'){
                     s.colorC = 'yellow';
                 } else if (s.colorC === "yellow"){
@@ -147,9 +147,9 @@ function FrameWork(){
                 } else if (s.colorC === "red"){
                     s.colorC = 'yellow'
                 }
-           } else {
-               s.colorC = 'lightblue';
-           }
+            } else {
+                s.colorC = 'lightblue';
+            }
         });
     }
 
@@ -189,7 +189,7 @@ function FrameWork(){
             }
         }
 
-        //genere un échelle aléatoire != 0
+        //genere un Ã©chelle alÃ©atoire != 0
         function genereScale(){
             let ps = Math.random() * 0.7;
             if (ps == 0){
@@ -201,7 +201,7 @@ function FrameWork(){
 
         //genere les n objets extraterrestres
         for(i = 0; i < n; i++){
-            let scale = genereScale();      //genere un échelle au hasard
+            let scale = genereScale();      //genere un Ã©chelle au hasard
             let posX = Math.floor(genereX(scale));       //position x
             let posY = Math.floor(genereY(scale));       //position y
             let vitX = Math.random() * 2;
@@ -279,7 +279,7 @@ function FrameWork(){
             }
         }
 
-        //genere un échelle aléatoire != 0
+        //genere un Ã©chelle alÃ©atoire != 0
         function genereScale(){
             let ps = Math.random() * 0.7;
             if (ps === 0){
@@ -291,7 +291,7 @@ function FrameWork(){
 
         //genere les n objets soucoupes
         for(i = 0; i < n; i++){
-            let scale = genereScale();      //genere un échelle au hasard
+            let scale = genereScale();      //genere un Ã©chelle au hasard
             let posX = Math.floor(genereX(scale));       //position x
             let posY = Math.floor(genereY(scale));       //position y
             let vitX = Math.floor(Math.random() * 6 - 12);
@@ -345,7 +345,7 @@ function FrameWork(){
         return canvas.offsetTop;
     }
 
-    //renvoye les coordonée du scroll
+    //renvoye les coordonÃ©e du scroll
     function getPosXScroll(){
         return window.scrollX;
     }
@@ -354,17 +354,17 @@ function FrameWork(){
         return window.scrollY;
     }
 
-    //fait tomber la soucoupe si on a cliqué dessus
+    //fait tomber la soucoupe si on a cliquÃ© dessus
     function downSoucoupe(xMouse, yMouse){
         tabObjectSoucoupe.forEach(function(s){
-           if(xMouse >= s.x - 50 && xMouse <= s.x + 50 && yMouse >= s.y - 50 && yMouse <= s.y + 50){
-               if (s.touch){
-                   s.touch = false;
-                   s.rotation = 0;
-               } else {
-                   s.touch = true;
-               }
-           }
+            if(xMouse >= s.x - 50 && xMouse <= s.x + 50 && yMouse >= s.y - 50 && yMouse <= s.y + 50){
+                if (s.touch){
+                    s.touch = false;
+                    s.rotation = 0;
+                } else {
+                    s.touch = true;
+                }
+            }
         });
     }
 
@@ -386,6 +386,4 @@ function FrameWork(){
         getPosXScroll,
         getPosYScroll
     }
-
-
 }
