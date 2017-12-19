@@ -1,9 +1,10 @@
 class CabineVaisseau {
 
-    constructor(img, w, h){
+    constructor(img, w, h, r){
         this.image = img;
         this.w = w;
         this.h = h;
+        this.rotation = r
     }
 
     draw(ctx){
@@ -13,14 +14,17 @@ class CabineVaisseau {
 
         ctx.save();
         ctx.translate(dw, dh);
-        ctx.rotate(.1);
+        ctx.rotate(this.rotation);
+        console.log(this.rotation);
+        ctx.scale(1.5, 1.5);
+        ctx.translate(0, 0);
         ctx.drawImage(this.image, -dw, -dh, this.w, this.h);
         ctx.restore();
     }
 
 
     rotate(){
-        ctx.rotate(.1);
+        this.rotation += .1;
     }
 
 }

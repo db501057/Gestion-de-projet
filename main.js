@@ -4,6 +4,11 @@ window.onload = init;
 var fw;
 var checkNuage;
 
+window.addEventListener('keydown', function (event) {
+    if(event.keyCode === 37){
+        fw.rotateVaisseau();
+    }
+});
 
 
 function init(){
@@ -61,9 +66,16 @@ function FrameWork(){
     let tabObjectExtraterrestre = [];     //tableau avec tous les objets du canvas
     let tabObjectCloud = [];
     let tabObjectSoucoupe = [];
+    let tabObjectEtoile = [];
     let couleur = Math.random() * 100 + 155;        //couleur des nuages au départ
     var colorCloud =  "rgb("+couleur+","+couleur+","+couleur+")";       //stockage de la couleur
     var speedSoucoupe = 0;      //vitesse en plus des soucoupe volantes
+    let img;
+
+
+    function rotateVaisseau(){
+        img.rotate();
+    }
 
 
     function init(){
@@ -73,7 +85,11 @@ function FrameWork(){
         //animation du canvas
         setInterval(changeColorChap, 10);       //changement de la couleur du chapeau de l'extraterrestre
         setInterval(colorBrakeSoucoupe, 3);     //chnagem la couleur de la cabine de la soucoupe quand on clique dessus
+        //setInterval(createEtoile(50), 1);
         requestAnimationFrame(animeCanvas);
+
+        createSoucoupe(2);
+
     }
 
     //renvoie la valeur de la vitesse des soucoupe précédente
@@ -87,17 +103,9 @@ function FrameWork(){
         h = canvas.height;
     }
 
-
-    function genereVaisseau(){
-        var imgHTML = document.querySelector('#cabineV');
-        let img = new CabineVaisseau(imgHTML, w, h);
-        img.draw(ctx);
-    }
-
-    console.log(tabObjectSoucoupe);
-
     //animation
     function animeCanvas(){
+        createEtoile(5);
         getDimCanavs();      //on verifie les dimension du canvas
         ctx.clearRect(0, 0, w, h);
         tabObjectExtraterrestre.forEach(function(r){
@@ -121,6 +129,15 @@ function FrameWork(){
         });
 
 
+        tabObjectEtoile.forEach(function (e) {
+            e.draw(ctx);
+            e.move(w, h);
+            if(e.getX > w || e.getX < 0 || e.getY > h || e.getY < 0){
+                e.pop();
+            }
+        });
+
+
 
         //test s'il faut recreer des nuages
         nuages();
@@ -128,7 +145,10 @@ function FrameWork(){
         //regarde les nuage a supprimer qui sont dehor du canvas
         removeCloud(tabObjectCloud);
 
-        genereVaisseau();
+        var imgHTML = document.querySelector('#cabineV');
+        img = new CabineVaisseau(imgHTML, w, h, 0);
+        img.draw(ctx);
+
 
         requestAnimationFrame(animeCanvas);
     }
@@ -313,6 +333,18 @@ function FrameWork(){
 
     }
 
+
+    //creer n étoile dans l'espace
+    function createEtoile(n){
+        for (var  i = 0; i < n; i++){
+            let posX = Math.random() * w;
+            let posY = Math.random() * h;
+            let taille  = Math.random() * 2;
+            let etoile = new Etoile(posX, posY, taille);
+            tabObjectEtoile.push(etoile);
+        }
+    }
+
     //gere nuage
     function nuages(){
         if (checkNuage){
@@ -395,7 +427,8 @@ function FrameWork(){
         getPosYCanvas,
         downSoucoupe,
         getPosXScroll,
-        getPosYScroll
+        getPosYScroll,
+        rotateVaisseau
     }
 
 
